@@ -14,8 +14,9 @@ jobs:
         node-version: 18
     - run: npm ci
     - run: npm run build
-    - run: tar cvzf github-pages dist
     - uses: actions/upload-pages-artifact@v2
+      with:
+        path: dist
 
   deploy:
     needs: build
