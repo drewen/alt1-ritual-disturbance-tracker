@@ -1,0 +1,11 @@
+/* Style overrides */
+
+html {
+  height: 100%;
+}
+  
+body {
+  background: black;
+  background: url('./img/background.png');
+  color: white;
+}
