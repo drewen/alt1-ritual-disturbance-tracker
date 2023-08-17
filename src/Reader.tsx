@@ -20,6 +20,8 @@ export default () => {
   const attraction = useGetAttraction();
   const tier = useGetTier();
   const [disturbances, setDisturbances] = useSetDisturbances();
+  const [exportUrl, setExportUrl] = useState("");
+  const [exportFilename, setExportFilename] = useState("");
   const [reader, setReader] = useState<ChatboxReader>();
   const [activeChatbox, setActiveChatbox] = useState<number>();
 
@@ -53,7 +55,7 @@ export default () => {
       }
     }
 
-    findChat();
+    window.setTimeout(findChat, 500)
   }, []);
 
   useEffect(() => {
@@ -99,6 +101,13 @@ export default () => {
     return () => window.clearInterval(interval);
   }, [reader, activeChatbox, disturbances, setDisturbances]);
 
+  useEffect(() => {
+    const filedata = new Blob([JSON.stringify(disturbances)], { type: "application/json" });
+    setExportUrl(URL.createObjectURL(filedata));
+    const currentTimestamp = (new Date()).toISOString();
+    setExportFilename(`disturbances-${currentTimestamp}.json`)
+  }, [disturbances])
+
   const chatboxOptions = map(range(0, reader?.pos?.boxes?.length ?? 0), (index) => {
     return <option key={index} value={index}>Chat {index}</option>;
   })
@@ -113,7 +122,9 @@ export default () => {
         </label>
       </div>
       <div>
-        <button disabled>Export</button>
+        <a href={exportUrl} download={exportFilename}>
+          <button>Export</button>
+        </a>
         <button onClick={resetDisturbances}>Reset</button>
         Total Rituals: {disturbances?.[tier]?.[attraction]?.ritual}
       </div>

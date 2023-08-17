@@ -1,9 +1,9 @@
 {
   "appName": "Ritual Disturbances",
   "description": "Tracks necromancy ritual disturbances and exports statistics",
-  "appUrl": "index.html",
-  "configUrl": "appconfig.json",
-  "iconUrl": "icon.png",
+  "appUrl": "./index.html",
+  "configUrl": "./appconfig.json",
+  "iconUrl": "./icon.png",
   "defaultWidth": 300,
   "defaultHeight": 300,
   "minWidth": 275,
