@@ -1,15 +1,9 @@
-# Minimal Alt1/webpack/typescript example
+# Alt1 Ritual Disturbance Tracker
 
-how to use
-```sh
-# to initialize the repo and install dependencies
-npm i
-# build
-npm run build
-# alternatively to auto-rebuild when source files are changed
-npm run watch
-```
+https://drewen.github.io/alt1-ritual-disturbance-tracker
 
-You can open `./dist/index.html` in your browser and it will give some basic functionality based one pasted images.
+You must have [Alt1](https://runeapps.org/alt1) or a similar RuneApps-compatible application to run
 
-You can also open it in the Alt1 browser and click the `add app` button that appears to get some basic alt1 functionality.
+This will read through your chat and attempt to track your ritual disturbances, providing some brief insights and percentages.
+
+Data can be uploaded to https://forms.gle/3UaZNRtHrcV9xZ1VA for future aggregations
