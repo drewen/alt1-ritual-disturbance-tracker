@@ -1,5 +1,5 @@
 {
-  "appName": "Ritual Disturbance Tracker",
+  "appName": "Ritual Disturbances",
   "description": "Tracks necromancy ritual disturbances and exports statistics",
   "appUrl": "index.html",
   "configUrl": "appconfig.json",
