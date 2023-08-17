@@ -10,6 +10,10 @@ body {
   color: white;
 }
 
+a {
+  color: gray;
+}
+
 .source {
   position: fixed;
   bottom: 5px;
