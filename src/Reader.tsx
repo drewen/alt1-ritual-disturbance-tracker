@@ -115,7 +115,7 @@ export default () => {
       <div>
         <button disabled>Export</button>
         <button onClick={resetDisturbances}>Reset</button>
-        Total Rituals: {disturbances[tier][attraction].ritual}
+        Total Rituals: {disturbances?.[tier]?.[attraction]?.ritual}
       </div>
     </div>
   );
