@@ -5,6 +5,7 @@ import "./index.css";
 import "./index.html";
 import "./appconfig.json";
 import "./img/icon.png";
+import "./img/github-mark-white.png";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

@@ -9,3 +9,9 @@ body {
   background: url('./img/background.png');
   color: white;
 }
+
+.source {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
