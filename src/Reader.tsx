@@ -13,7 +13,7 @@ const EVENT_TEXT = {
   "pool of miasma has appeared": "defile",
   "deathshead moth is drawn": "moth",
   "complete the ritual": "ritual",
-  "tome of experience": "tome",
+  "Necromancer's Tome": "tome",
 }
 
 export default () => {
