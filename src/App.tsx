@@ -11,22 +11,18 @@ const Toggle = styled.div`
   right: 5px;
   cursor: pointer;
   text-align: center;
+  z-index: 1000;
 `
 
 export default () => {
   const [showAbout, setShowAbout] = useState(false);
 
-  const contents = showAbout ? <About /> : (
-    <>
-      <Reader />
-      <Output />
-    </>
-  );
   return (
     <React.StrictMode>
       <Alt1Wrapper>
-        {contents}
-
+        {showAbout && <About />}
+        <Reader />
+        <Output />
         <a className="source" href="https://github.com/drewen/alt1-ritual-disturbance-tracker" target="_blank"><img src="./github-mark-white.png" width="15px" height="15px" /></a>
         <Toggle className="nisimgbutton" onClick={() => setShowAbout(!showAbout)}>
           {showAbout ? "x" : "?"}

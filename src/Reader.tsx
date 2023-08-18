@@ -71,7 +71,7 @@ export default () => {
       reader.pos.mainbox = reader.pos.boxes[activeChatbox];
       alt1.overLayRect(
         a1lib.mixColor(255, 255, 255),
-        reader.pos.mainbox.rect.x - 5,
+        reader.pos.mainbox.rect.x - 4,
         reader.pos.mainbox.rect.y - 25,
         reader.pos.mainbox.rect.width + 20,
         reader.pos.mainbox.rect.height + 20,
@@ -86,7 +86,6 @@ export default () => {
   useEffect(() => {
     let timeout
     const readChatbox = () => {
-      console.log("reading")
       if (reader && reader.pos && activeChatbox !== undefined) {
         const chatLines = reader.read();
         const eventMessages = keys(EVENT_TEXT);
@@ -108,7 +107,7 @@ export default () => {
         }
       }
 
-      timeout = window.setTimeout(readChatbox, 600);
+      timeout = window.setTimeout(readChatbox, 1000);
     }
 
     readChatbox();

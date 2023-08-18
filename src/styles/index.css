@@ -12,4 +12,5 @@ a {
   position: fixed;
   bottom: 30px;
   right: 7px;
+  z-index: 1000;
 }
