@@ -84,7 +84,9 @@ export default () => {
   }, [activeChatbox]);
 
   useEffect(() => {
+    let timeout
     const readChatbox = () => {
+      console.log("reading")
       if (reader && reader.pos && activeChatbox !== undefined) {
         const chatLines = reader.read();
         const eventMessages = keys(EVENT_TEXT);
@@ -105,11 +107,13 @@ export default () => {
           setDisturbances(disturbances);
         }
       }
+
+      timeout = window.setTimeout(readChatbox, 600);
     }
 
-    const interval = window.setInterval(readChatbox, 500);
+    readChatbox();
 
-    return () => window.clearInterval(interval);
+    return () => window.clearTimeout(timeout);
   }, [reader, activeChatbox, disturbances, setDisturbances]);
 
   useEffect(() => {
@@ -126,30 +130,33 @@ export default () => {
   return (
     <div>
       <table>
-        <tr>
-          <td>Ritual Tier</td>
-          <td>
-            <select className="nisdropdown" value={tier} onChange={chooseTier}>
-              <option>lesser</option>
-              <option>greater</option>
-              <option>powerful</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Soul Attraction</td>
-          <td>
-            <input className="nisinput" value={attraction} onChange={chooseAttraction} type="number" min="100" max="2000" />%
-          </td>
-        </tr>
-        <tr>
-          <td>Active Chatbox</td>
-          <td>
-            <select className="nisdropdown" value={activeChatbox} onChange={chooseActiveCheckbox}>
-              {chatboxOptions}
-            </select>
-          </td>
-        </tr>
+        <tbody>
+
+          <tr>
+            <td>Ritual Tier</td>
+            <td>
+              <select className="nisdropdown" value={tier} onChange={chooseTier}>
+                <option>lesser</option>
+                <option>greater</option>
+                <option>powerful</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Soul Attraction</td>
+            <td>
+              <input className="nisinput" value={attraction} onChange={chooseAttraction} type="number" min="100" max="2000" />%
+            </td>
+          </tr>
+          <tr>
+            <td>Active Chatbox</td>
+            <td>
+              <select className="nisdropdown" value={activeChatbox} onChange={chooseActiveCheckbox}>
+                {chatboxOptions}
+              </select>
+            </td>
+          </tr>
+        </tbody>
       </table>
       <div>
         <a href={exportUrl} download={exportFilename}>
