@@ -31,7 +31,7 @@ export default () => {
 
   return (
     <>
-      <table>
+      <table className="nistable">
         <thead>
           <tr>
             <th>Event</th>

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css";
+import "./styles/index.css";
+import "./styles/nis.css";
 import "./index.html";
 import "./appconfig.json";
 import "./img/icon.png";

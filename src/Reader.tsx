@@ -1,7 +1,7 @@
 import React, { EventHandler, ChangeEvent, useState, useEffect } from "react";
 import * as a1lib from "alt1";
 import ChatboxReader from "alt1/chatbox";
-import { useGetAttraction, useGetTier, useSetDisturbances, DEFAULT_DISTURBANCES } from "./hooks";
+import { useSetAttraction, useSetTier, useSetDisturbances, RitualTier, DEFAULT_DISTURBANCES } from "./hooks";
 import { keys, map, range } from "lodash";
 
 const EVENT_TEXT = {
@@ -17,8 +17,8 @@ const EVENT_TEXT = {
 }
 
 export default () => {
-  const attraction = useGetAttraction();
-  const tier = useGetTier();
+  const [attraction, setAttraction] = useSetAttraction();
+  const [tier, setTier] = useSetTier();
   const [disturbances, setDisturbances] = useSetDisturbances();
   const [exportUrl, setExportUrl] = useState("");
   const [exportFilename, setExportFilename] = useState("");
@@ -27,6 +27,14 @@ export default () => {
 
   const chooseActiveCheckbox: EventHandler<ChangeEvent<HTMLSelectElement>> = (event) => {
     setActiveChatbox(parseInt(event.target.value))
+  }
+
+  const chooseTier: EventHandler<ChangeEvent<HTMLSelectElement>> = (event) => {
+    setTier(event.target.value as RitualTier)
+  }
+
+  const chooseAttraction: EventHandler<ChangeEvent<HTMLInputElement>> = (event) => {
+    setAttraction(parseInt(event.target.value))
   }
 
   const resetDisturbances = () => {
@@ -82,17 +90,20 @@ export default () => {
         const eventMessages = keys(EVENT_TEXT);
         const disturbancesForTier = disturbances[tier] ?? {};
         const disturbancesForAttraction = disturbancesForTier[attraction] ?? DEFAULT_DISTURBANCES;
+        let newEvents = false;
         chatLines?.forEach(chatline => {
           const message = eventMessages.find(eventMessage => chatline.text.includes(eventMessage));
           if (EVENT_TEXT[message]) {
             disturbancesForAttraction[EVENT_TEXT[message]] += 1;
+            newEvents = true;
           }
         });
 
-        disturbancesForTier[attraction] = disturbancesForAttraction;
-        
-        disturbances[tier] = disturbancesForTier;
-        setDisturbances(disturbances);
+        if (newEvents) {
+          disturbancesForTier[attraction] = disturbancesForAttraction;
+          disturbances[tier] = disturbancesForTier;
+          setDisturbances(disturbances);
+        }
       }
     }
 
@@ -114,19 +125,38 @@ export default () => {
 
   return (
     <div>
-      <div>
-        <label>Active Chatbox:
-          <select value={activeChatbox} onChange={chooseActiveCheckbox}>
-            {chatboxOptions}
-          </select>
-        </label>
-      </div>
+      <table>
+        <tr>
+          <td>Ritual Tier</td>
+          <td>
+            <select className="nisdropdown" value={tier} onChange={chooseTier}>
+              <option>lesser</option>
+              <option>greater</option>
+              <option>powerful</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Soul Attraction</td>
+          <td>
+            <input className="nisinput" value={attraction} onChange={chooseAttraction} type="number" min="100" max="2000" />%
+          </td>
+        </tr>
+        <tr>
+          <td>Active Chatbox</td>
+          <td>
+            <select className="nisdropdown" value={activeChatbox} onChange={chooseActiveCheckbox}>
+              {chatboxOptions}
+            </select>
+          </td>
+        </tr>
+      </table>
       <div>
         <a href={exportUrl} download={exportFilename}>
-          <button>Export</button>
+          <button className="nisbutton nissmallbutton">Export</button>
         </a>
-        <button onClick={resetDisturbances}>Reset</button>
-        Total Rituals: {disturbances?.[tier]?.[attraction]?.ritual}
+        <button onClick={resetDisturbances} className="nisbutton nissmallbutton">Reset</button>
+        Rituals: {disturbances?.[tier]?.[attraction]?.ritual}
       </div>
     </div>
   );

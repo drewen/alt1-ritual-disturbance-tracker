@@ -1,0 +1,15 @@
+/* Style overrides */
+
+body {
+  padding: 5px;
+}
+
+a {
+  color: gray;
+}
+
+.source {
+  position: fixed;
+  bottom: 30px;
+  right: 7px;
+}
