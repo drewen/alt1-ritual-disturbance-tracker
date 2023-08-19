@@ -93,6 +93,9 @@ export default () => {
         const disturbancesForAttraction = disturbancesForTier[attraction] ?? DEFAULT_DISTURBANCES;
         let newEvents = false;
         chatLines?.forEach(chatline => {
+          if ((window as any).DEBUG) {
+            console.log(chatline.text)
+          }
           const message = eventMessages.find(eventMessage => chatline.text.includes(eventMessage));
           if (EVENT_TEXT[message]) {
             disturbancesForAttraction[EVENT_TEXT[message]] += 1;
