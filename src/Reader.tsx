@@ -91,7 +91,7 @@ export default () => {
         const chatLines = reader.read();
         const eventMessages = keys(EVENT_TEXT);
         const disturbancesForTier = disturbances[tier] ?? {};
-        const disturbancesForAttraction = disturbancesForTier[attraction] ?? DEFAULT_DISTURBANCES;
+        const disturbancesForAttraction = disturbancesForTier[attraction] ?? {...DEFAULT_DISTURBANCES};
         let newEvents = false;
         chatLines?.forEach(chatline => {
           if ((window as any).DEBUG) {

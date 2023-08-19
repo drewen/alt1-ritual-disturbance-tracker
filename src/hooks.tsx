@@ -19,7 +19,7 @@ export const useGetDisturbances = (attraction: number, tier: RitualTier) => {
   const [ritualDisturbances] = useLocalStorage('ritualDisturbances', {});
 
   const disturbancesForTier = ritualDisturbances[tier] ?? {};
-  const disturbancesForAttraction = disturbancesForTier[attraction] ?? DEFAULT_DISTURBANCES;
+  const disturbancesForAttraction = disturbancesForTier[attraction] ?? {...DEFAULT_DISTURBANCES};
 
   return disturbancesForAttraction
 }
