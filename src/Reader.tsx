@@ -9,6 +9,7 @@ const EVENT_TEXT = {
   "cloud of sparkles has taken over": "sparkling",
   "shambling horror has spawned": "shambling",
   "corrupt glyphs have appeared": "corrupt",
+  "corrupt giyphs have appeared": "corrupt",
   "storm of souls has taken over": "storm",
   "pool of miasma has appeared": "defile",
   "deathshead moth is drawn": "moth",
