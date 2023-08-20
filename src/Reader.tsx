@@ -15,6 +15,7 @@ const EVENT_TEXT = {
   "deathshead moth is drawn": "moth",
   "complete the ritual": "ritual",
   "is added to your backpack: 1 x Necromancer": "tome",
+  "Necromancer's tome of experience": "tome",
 }
 
 export default () => {
