@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { Parser } from '@json2csv/plainjs';
-import * as data from "../data/reports.json";
+import * as data from "./data/reports.json";
 import { writeFileSync } from "fs";
 import { join } from "path";
 
