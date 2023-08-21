@@ -30,7 +30,9 @@ const consolidateDisturbancesByTierAttraction = (data: typeof DEFAULT_DISTURBANC
 const consolidateDisturbancesByTier = (data: Record<string, typeof DEFAULT_DISTURBANCES>, disturbancesForAttraction: Record<string, typeof DEFAULT_DISTURBANCES>) => {
   const accumulator = {...data}
   _.forEach(disturbancesForAttraction, (disturbances, attraction) => {
-    accumulator[attraction] = consolidateDisturbancesByTierAttraction(accumulator[attraction], disturbances);
+    if (disturbances.moth) {
+      accumulator[attraction] = consolidateDisturbancesByTierAttraction(accumulator[attraction], disturbances);
+    }
   });
 
   return accumulator;

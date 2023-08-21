@@ -5,9 +5,9 @@ import { useSetAttraction, useSetTier, useSetDisturbances, RitualTier, DEFAULT_D
 import { keys, map, range } from "lodash";
 
 const EVENT_TEXT = {
-  "wandering soul has spawned": "wandering",
+  "wandering soul has appeared": "wandering",
   "cloud of sparkles has taken over": "sparkling",
-  "shambling horror has spawned": "shambling",
+  "shambling horror has appeared": "shambling",
   "corrupt glyphs have appeared": "corrupt",
   "corrupt giyphs have appeared": "corrupt",
   "storm of souls has taken over": "storm",
