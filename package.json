@@ -2,7 +2,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "data": "ts-node ./dataProcessor"
+    "data": "ts-node ./data/dataProcessor"
   },
   "dependencies": {
     "alt1": "^0.0.1",
