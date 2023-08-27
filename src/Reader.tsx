@@ -3,6 +3,7 @@ import * as a1lib from "alt1";
 import ChatboxReader from "alt1/chatbox";
 import { useSetAttraction, useSetTier, useSetDisturbances, RitualTier, DEFAULT_DISTURBANCES } from "./hooks";
 import { keys, map, range } from "lodash";
+import Export from "./Export";
 
 const EVENT_TEXT = {
   "wandering soul has appeared": "wandering",
@@ -22,8 +23,7 @@ export default () => {
   const [attraction, setAttraction] = useSetAttraction();
   const [tier, setTier] = useSetTier();
   const [disturbances, setDisturbances] = useSetDisturbances();
-  const [exportUrl, setExportUrl] = useState("");
-  const [exportFilename, setExportFilename] = useState("");
+  const [showExport, setShowExport] = useState(false);
   const [reader, setReader] = useState<ChatboxReader>();
   const [activeChatbox, setActiveChatbox] = useState<number>();
 
@@ -120,22 +120,15 @@ export default () => {
     return () => window.clearTimeout(timeout);
   }, [reader, activeChatbox, disturbances, setDisturbances]);
 
-  useEffect(() => {
-    const filedata = new Blob([JSON.stringify(disturbances)], { type: "application/json" });
-    setExportUrl(URL.createObjectURL(filedata));
-    const currentTimestamp = (new Date()).toISOString();
-    setExportFilename(`disturbances-${currentTimestamp}.json`)
-  }, [disturbances])
-
   const chatboxOptions = map(range(0, reader?.pos?.boxes?.length ?? 0), (index) => {
     return <option key={index} value={index}>Chat {index}</option>;
   })
 
   return (
     <div>
+      {showExport && <Export disturbances={disturbances} closeExport={() => setShowExport(false)} />}
       <table>
         <tbody>
-
           <tr>
             <td>Ritual Tier</td>
             <td>
@@ -163,9 +156,7 @@ export default () => {
         </tbody>
       </table>
       <div>
-        <a href={exportUrl} download={exportFilename}>
-          <button className="nisbutton nissmallbutton">Export</button>
-        </a>
+        <button className="nisbutton nissmallbutton" onClick={() => setShowExport(true)}>Export</button>
         <button onClick={resetDisturbances} className="nisbutton nissmallbutton">Reset</button>
         Rituals: {disturbances?.[tier]?.[attraction]?.ritual}
       </div>
